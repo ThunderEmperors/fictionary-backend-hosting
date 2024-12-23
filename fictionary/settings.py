@@ -34,7 +34,7 @@ FRONTEND_HOST = os.environ.get('FRONTEND_HOST', 'http://127.0.0.1:3000')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =False
+DEBUG =True
 ALLOWED_HOSTS = ['*']
 
 
