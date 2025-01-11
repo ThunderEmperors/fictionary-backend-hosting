@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Question, User, Card
+from .models import Question, User, Card, Update
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -20,4 +20,9 @@ class LoginSerializer(serializers.ModelSerializer):
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
+        fields = "__all__"
+
+class UpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Update
         fields = "__all__"
