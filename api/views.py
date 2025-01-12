@@ -428,7 +428,7 @@ class getUserCoins(generics.GenericAPIView):
 @permission_classes([IsAuthenticated])
 class getUpdates(generics.GenericAPIView):
     def get(self, request):
-        updates = list(Update.objects.filter().order_by('time'))
+        updates = list(Update.objects.filter().order_by('-time'))
         
         updates_response = []
 
