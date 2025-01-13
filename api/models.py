@@ -42,3 +42,7 @@ class Card(models.Model):
     card_text = models.CharField(max_length=100)
     card_desc = models.CharField(max_length=500)
     card_coins = models.IntegerField(default=10)
+
+class Update(models.Model):
+    update_text = models.CharField(max_length=500)
+    time = models.DateTimeField(blank=True, null=True)

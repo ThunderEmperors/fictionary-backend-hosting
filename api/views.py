@@ -3,7 +3,7 @@ from django.db.models import Model
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from .serializers import *
-from .models import User, Question, Meta, Card
+from .models import User, Question, Meta, Card, Update
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics, status
@@ -379,9 +379,16 @@ class changeCardStatus(generics.GenericAPIView):
                 user = User.objects.filter().order_by('-points', 'time')[:1].get()
                 if(user.points >= 10):
                     user.points = user.points-10
+                    new_update_text = request.user.first_name + " reduced " + user.first_name + "'s points by 10"
+                    new_update = Update(update_text=new_update_text, time=timezone.now())
+                    new_update.save()
                 user.save()
             if(i == 1):
                 request.user.points = request.user.points + 10
+                new_update_text = request.user.first_name + " increased their points by 10"
+                new_update = Update(update_text=new_update_text, time=timezone.now())
+
+                new_update.save()
             if(i == 2):
                 request.user.show_country = True
             if(i == 3):
@@ -416,4 +423,22 @@ class getUserCoins(generics.GenericAPIView):
         coins = request.user.coins_aval
         return JsonResponse({
             'coins' : coins
+        })
+
+@permission_classes([IsAuthenticated])
+class getUpdates(generics.GenericAPIView):
+    def get(self, request):
+        updates = list(Update.objects.filter().order_by('-time'))
+        
+        updates_response = []
+
+        for update in updates:
+            try:
+                if update.update_text:
+                    updates_response.append({'update_text' : update.update_text})
+            except:
+                continue
+        
+        return JsonResponse({
+            'updates' : updates_response
         })

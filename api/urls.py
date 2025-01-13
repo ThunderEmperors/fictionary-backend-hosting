@@ -47,4 +47,5 @@ urlpatterns = [
     path('cards/', csrf_exempt(available_when_live(views.getCards.as_view())), name='getCards'),
     path('change-card-status/', csrf_exempt(available_when_live(views.changeCardStatus.as_view())), name='changeCardStatus'),
     path('get-user-coins/', csrf_exempt(available_when_live(views.getUserCoins.as_view())), name='getUserCoins'),
+    path('get-updates/', csrf_exempt(available_when_live(views.getUpdates.as_view())), name='getUpdates'),
 ]
