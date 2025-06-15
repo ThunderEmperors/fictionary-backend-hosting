@@ -25,7 +25,7 @@ class User(AbstractUser):
     picture = models.URLField(verbose_name="Avatar of the user: ", default=None, null=True)
     cardTypeA = models.CharField(max_length=10, default="000000000")
     coins_aval = models.IntegerField(default=0)
-    show_country = models.BooleanField(default = False) 
+    show_country = models.BooleanField(default = False)
     show_media = models.BooleanField(default = False)
     show_language = models.BooleanField(default = False)
     show_year = models.BooleanField(default = False)
